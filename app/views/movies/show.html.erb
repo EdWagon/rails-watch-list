@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="my-4"><%= @movie.title %></h1>
+      <div class="text-center mb-4">
+        <%= image_tag(@movie.poster_url, alt: "movie poster image", class: "img-fluid rounded") %>
+      </div>
+      <p class="lead"><strong>Rating:</strong> <%= @movie.rating %></p>
+      <p class="lead"><strong>Overview:</strong> <%= @movie.overview %></p>
+      <%= link_to "Back to movies", movies_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
