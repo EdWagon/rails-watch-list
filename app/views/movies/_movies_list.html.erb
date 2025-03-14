@@ -1,0 +1,19 @@
+<% movies.each do |movie| %>
+  <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+    <div class="card h-100">
+      <%= link_to movie_path(movie) do %>
+        <%= image_tag(movie.poster_url, alt: "movie poster image", class: "card-img-top") %>
+      <% end %>
+      <div class="card-body text-center">
+        <h6 class="card-title fw-bold">
+          <%= link_to movie.title, movie_path(movie), class: "text-decoration-none text-dark" %>
+        </h6>
+        <p class="mb-1">Year: <%= movie.release_date&.year || "N/A" %></p>
+        <p class="mb-1">
+          Popularity: <%= movie.popularity || "N/A" %> |
+          Rating: <%= movie.rating.present? ? movie.rating.round(1) : "N/A" %>
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %>

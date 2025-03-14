@@ -1,0 +1,19 @@
+<div class="container mt-5">
+  <h1 class="mb-4">New List</h1>
+
+  <%= form_with model: @list, local: true, html: { class: 'needs-validation', novalidate: true } do |form| %>
+    <div class="mb-3">
+      <%= form.label :name, class: 'form-label' %>
+      <%= form.text_field :name, class: 'form-control', required: true %>
+      <div class="invalid-feedback">
+        Please provide a name for the list.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <%= form.submit 'Create List', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+
+  <%= link_to 'Back to Lists', lists_path, class: 'btn btn-secondary' %>
+</div>

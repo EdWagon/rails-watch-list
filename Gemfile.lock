@@ -167,6 +167,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.18.3-x86_64-linux-musl)
       racc (~> 1.4)
+    parallel (1.26.3)
     pg (1.5.9)
     popper_js (2.11.8)
     pp (0.6.2)
@@ -269,6 +270,9 @@ GEM
     turbo-rails (2.0.13)
       actionpack (>= 7.1.0)
       railties (>= 7.1.0)
+    turbolinks (5.2.1)
+      turbolinks-source (~> 5.2)
+    turbolinks-source (5.2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     web-console (4.2.1)
@@ -302,6 +306,7 @@ DEPENDENCIES
   font-awesome-sass (~> 6.1)
   importmap-rails
   jbuilder
+  parallel
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.1.5, >= 7.1.5.1)
@@ -312,6 +317,7 @@ DEPENDENCIES
   sprockets-rails
   stimulus-rails
   turbo-rails
+  turbolinks (~> 5)
   tzinfo-data
   web-console
 

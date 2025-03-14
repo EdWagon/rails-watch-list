@@ -1,17 +1,49 @@
 <div class="container">
-  <h1 class="my-4">All Movies</h1>
-  <div class="row">
-    <% @movies.each do |movie| %>
-      <div class="col-md-4 mb-4">
-        <div class="card h-100">
-          <%= image_tag(movie.poster_url, alt: "movie poster image", class: "card-img-top") %>
-          <div class="card-body">
-            <h5 class="card-title"><%= link_to movie.title, movie_path(movie), class: "text-decoration-none text-dark" %></h5>
-            <p class="card-text"><%= movie.overview %></p>
-            <p class="card-text"><small class="text-muted">Rating: <%= movie.rating %></small></p>
-          </div>
-        </div>
-      </div>
-    <% end %>
+  <!-- Search Bar -->
+  <div class="mt-4 mb-4">
+    <input type="text" id="movie-search" class="form-control" placeholder="Search for a movie...">
   </div>
+
+<div id="movies-list" class="row">
+  <% @movies.each do |movie| %>
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+      <div class="card h-100">
+        <%= link_to movie_path(movie), class: "text-decoration-none text-dark" do %>
+          <%= image_tag(movie.poster_url, alt: "movie poster image", class: "card-img-top") %>
+          <div class="card-body text-center">
+            <h6 class="card-title fw-bold"><%= movie.title %></h6>
+            <p class="mb-1">Year: <%= movie.release_date&.year || "N/A" %></p>
+            <p class="mb-1">
+              Popularity: <%= movie.popularity || "N/A" %> |
+              Rating: <%= movie.rating.present? ? movie.rating.round(1) : "N/A" %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("movie-search");
+
+    searchInput.addEventListener("input", function () {
+      const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+
+      fetch(`/movies?query=${searchInput.value}`, {
+        method: "GET",
+        headers: {
+          "Accept": "text/javascript",
+          "X-Requested-With": "XMLHttpRequest",
+          "X-CSRF-Token": csrfToken
+        },
+      })
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById("movies-list").innerHTML = html;
+      });
+    });
+  });
+</script>
